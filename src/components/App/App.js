@@ -8,11 +8,11 @@ import OrderForm from '../../components/OrderForm/OrderForm'
     const [orders, setOrders] = useState([])
     const [error, setError] = useState(null)
 
-    // useEffect(() => {
-    //   getOrders()
-    //   .then(data => setOrders(data.data))
-    //   .catch(err => setError(err))
-    // }, [orders])
+    useEffect(() => {
+      getOrders()
+      .then(data => setOrders(data.orders))
+      .catch(err => setError(err))
+    }, [orders])
 
     const addOrder = (burrito) => {
       setOrders([...orders, burrito])

@@ -8,7 +8,7 @@ const OrderForm = ({ addOrder }) => {
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream']
     return possibleIngredients.map(ingredient => {
       return (
-        <label htmlFor='checkbox'>
+        <label htmlFor='checkbox' key={ingredient}>
           <input
             key={ingredient}
             name={ingredient}
@@ -66,7 +66,7 @@ const OrderForm = ({ addOrder }) => {
         onChange={(e) => setName(e.target.value)}
       />
 
-      { makeCheckboxes()}
+      { makeCheckboxes() }
 
       <p>Order: {ingredients.join(', ') || 'Nothing selected'}</p>
 
