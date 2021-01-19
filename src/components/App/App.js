@@ -19,6 +19,14 @@ const App = () => {
     postOrder(burrito)
   }
 
+  const removeOrder = (orderId) => {
+    const filteredOrders = orders.filter(order => {
+      return order.id !== orderId
+    })
+    setOrders(filteredOrders)
+    deleteOrder(orderId)
+  }
+
   return (
     !error ?
     <main className="App">
@@ -28,7 +36,10 @@ const App = () => {
           addOrder={addOrder}
         />
       </header>
-      <Orders orders={orders} />
+      <Orders 
+        orders={orders} 
+        removeOrder={removeOrder}
+      />
     </main> :
     <h2>Error! :(</h2>
   )
