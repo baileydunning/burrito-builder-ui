@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import './OrderForm.css'
 
 const OrderForm = ({ addOrder }) => {
   const [name, setName] = useState('')
@@ -59,7 +60,7 @@ const OrderForm = ({ addOrder }) => {
   }
 
   return (
-    <form data-testid='order-form'>
+    <form className='form' data-testid='order-form'>
       <input
         type='text'
         placeholder='Name'
@@ -67,9 +68,9 @@ const OrderForm = ({ addOrder }) => {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-
-      { makeCheckboxes() }
-
+      <div className='checkboxes'>
+        { makeCheckboxes() }
+      </div>
       <p>Order: {ingredients.join(', ') || 'Nothing selected'}</p>
 
       <button onClick={e => handleSubmit(e)}>

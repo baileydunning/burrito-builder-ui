@@ -1,8 +1,19 @@
+.orders-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
 .order {
+  align-content: center;
   border: 1px solid black;
   display: inline-block;
-  margin: 10px;
+  margin: 5%;
   background-color: #FFF;
+}
+
+.order button {
+  margin-bottom: 5%;
 }
 
 .ingredient-list {

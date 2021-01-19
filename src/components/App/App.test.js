@@ -1,9 +1,8 @@
 import React from 'react'
 import App from './App'
-import Orders from '../Orders/Orders'
-import { act, render, screen } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { getOrders, postOrder, deleteOrder } from '../../apiCalls'
+import { getOrders } from '../../apiCalls'
 import { testOrders } from '../../sampleData'
 import '@testing-library/jest-dom'
 jest.mock('../../apiCalls')
@@ -22,7 +21,7 @@ describe('App', () => {
     // I'm not sure what's up with this test file, but it's not allowing me to do a lot of things I usually can. 
     // For instance, when I wrap renders in an act like the console is telling me to, nothing will render.
     // If my render is in a beforeEach, everything breaks. This didn't happen on my OrderForm test
-    // For some reason I can add/remove orders - just not show them
+    // For some reason I can add/remove orders - just not show them from my sample data
     // A test in the Orders component showed my data does render when directly passed in
   })
 

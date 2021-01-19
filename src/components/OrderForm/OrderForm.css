@@ -1,0 +1,21 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkboxes {
+  width: 70%;
+}
+
+input {
+  margin: 1%;
+}
+
+button {
+  border-radius: 5%;
+  height: 30px;
+  background-color: black;
+  color: white;
+}
