@@ -17,4 +17,16 @@ describe('OrderForm', () => {
     const orderForm = screen.getByTestId('order-form')
     expect(orderForm).toBeInTheDocument()
   })
+
+  it('should render a checkbox for each ingredient', () => {
+    const checkboxes = screen.getAllByRole('checkbox')
+    expect(checkboxes.length).toBe(12)
+    expect(screen.getByText('guacamole')).toBeInTheDocument()
+  })
+
+  it('should allow a user to enter their name', () => {
+    const nameField = screen.getByPlaceholderText('Name')
+    userEvent.type(nameField, 'Bailey')
+    expect(nameField).toHaveValue('Bailey')
+  })
 })
