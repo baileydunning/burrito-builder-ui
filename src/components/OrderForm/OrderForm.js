@@ -1,34 +1,63 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react'
 
-class OrderForm extends Component {
-  constructor(props) {
-    super();
-    this.props = props;
-    this.state = {
-      name: '',
-      ingredients: []
-    };
-  }
+  const OrderForm = ({ addOrder }) => {
+    const [name, setName] = useState('')
+    const [ingredients, setIngredients] = useState([])
 
+    // const makeIngredientBtns = () => {
+    //   const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
+    //   return possibleIngredients.map(ingredient => {
+    //     return (
+    //       <button 
+    //         key={ingredient} 
+    //         name={ingredient} 
+    //         onClick={e => setIngredients([...ingredients, e.target.value])}
+    //       >
+    //         {ingredient}
+    //       </button>
+    //     )
+    //   })
+    // }
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.clearInputs();
-  }
+      const makeIngredientBtns = () => {
+      const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
+      return possibleIngredients.map(ingredient => {
+        return (
+          <label htmlFor='checkbox'>
+          <input 
+            key={ingredient} 
+            name={ingredient}
+            type='checkbox' 
+            onChange={() => handleIngredients(ingredient)}
+            
+            />
+            {ingredient}
+          </label>
+        )
+      })
+    }
 
-  clearInputs = () => {
-    this.setState({name: '', ingredients: []});
-  }
+    const handleIngredients = (ingredient) => {
+      if (!ingredients.includes(ingredient)) {
+        setIngredients([...ingredients, ingredient])
+      } else {
+        const filteredIngredients = ingredients.filter(item => {
+          return ingredient !== item
+        })
+        setIngredients(filteredIngredients) 
+      }
 
-  render() {
-    const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
-    const ingredientButtons = possibleIngredients.map(ingredient => {
-      return (
-        <button key={ingredient} name={ingredient} onClick={e => this.handleIngredientChange(e)}>
-          {ingredient}
-        </button>
-      )
-    });
+    }
+
+    const handleSubmit = e => {
+      e.preventDefault()
+      clearInputs()
+    }
+
+    const clearInputs = () => {
+      setName('')
+      setIngredients([])
+    }
 
     return (
       <form>
@@ -36,20 +65,20 @@ class OrderForm extends Component {
           type='text'
           placeholder='Name'
           name='name'
-          value={this.state.name}
-          onChange={e => this.handleNameChange(e)}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
 
-        { ingredientButtons }
+        { makeIngredientBtns() }
 
-        <p>Order: { this.state.ingredients.join(', ') || 'Nothing selected' }</p>
+        <p>Order: {ingredients.join(', ') || 'Nothing selected'}</p>
 
-        <button onClick={e => this.handleSubmit(e)}>
+        <button onClick={e => handleSubmit(e)}>
           Submit Order
         </button>
       </form>
     )
+
   }
-}
 
 export default OrderForm;
