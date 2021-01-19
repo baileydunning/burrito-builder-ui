@@ -4,33 +4,18 @@ import React, { useState } from 'react'
     const [name, setName] = useState('')
     const [ingredients, setIngredients] = useState([])
 
-    // const makeIngredientBtns = () => {
-    //   const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
-    //   return possibleIngredients.map(ingredient => {
-    //     return (
-    //       <button 
-    //         key={ingredient} 
-    //         name={ingredient} 
-    //         onClick={e => setIngredients([...ingredients, e.target.value])}
-    //       >
-    //         {ingredient}
-    //       </button>
-    //     )
-    //   })
-    // }
-
-      const makeIngredientBtns = () => {
-      const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
+    const makeCheckboxes = () => {
+      const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream']
       return possibleIngredients.map(ingredient => {
         return (
           <label htmlFor='checkbox'>
           <input 
             key={ingredient} 
             name={ingredient}
-            type='checkbox' 
+            type='checkbox'
+            checked={ingredients.includes(ingredient) ? true : false}
             onChange={() => handleIngredients(ingredient)}
-            
-            />
+          />
             {ingredient}
           </label>
         )
@@ -44,14 +29,24 @@ import React, { useState } from 'react'
         const filteredIngredients = ingredients.filter(item => {
           return ingredient !== item
         })
-        setIngredients(filteredIngredients) 
+        setIngredients(filteredIngredients)
       }
-
     }
 
     const handleSubmit = e => {
       e.preventDefault()
-      clearInputs()
+
+      const burritoOrder = {
+        name: name,
+        ingredients: ingredients
+      }
+
+      if (ingredients.length === 0) {
+        alert('Add some ingredients to your order!')
+      } else {
+        addOrder(burritoOrder)
+        clearInputs()
+      }
     }
 
     const clearInputs = () => {
@@ -69,7 +64,7 @@ import React, { useState } from 'react'
           onChange={(e) => setName(e.target.value)}
         />
 
-        { makeIngredientBtns() }
+        { makeCheckboxes() }
 
         <p>Order: {ingredients.join(', ') || 'Nothing selected'}</p>
 
