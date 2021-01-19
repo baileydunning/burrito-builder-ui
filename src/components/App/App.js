@@ -4,32 +4,34 @@ import { getOrders } from '../../apiCalls'
 import Orders from '../../components/Orders/Orders'
 import OrderForm from '../../components/OrderForm/OrderForm'
 
-  const App = () => {
-    const [orders, setOrders] = useState([])
-    const [error, setError] = useState(null)
+const App = () => {
+  const [orders, setOrders] = useState([])
+  const [error, setError] = useState(null)
 
-    useEffect(() => {
-      getOrders()
+  useEffect(() => {
+    getOrders()
       .then(data => setOrders(data.orders))
       .catch(err => setError(err))
-    }, [orders])
+  }, [orders])
 
-    const addOrder = (burrito) => {
-      setOrders([...orders, burrito])
-    }
-  
-    return (
-      <main className="App">
-        <header>
-          <h1>Burrito Builder</h1>
-          <OrderForm
-            addOrder={addOrder} 
-          />
-        </header>
-        <Orders orders={orders}/>
-      </main>
-    )
+  const addOrder = (burrito) => {
+    setOrders([...orders, burrito])
+  }
+
+  return (
+    !error ?
+    <main className="App">
+      <header>
+        <h1>Burrito Builder</h1>
+        <OrderForm
+          addOrder={addOrder}
+        />
+      </header>
+      <Orders orders={orders} />
+    </main> :
+    <h2>Error! :(</h2>
+  )
 }
 
 
-export default App;
+export default App
