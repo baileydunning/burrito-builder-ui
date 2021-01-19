@@ -29,4 +29,25 @@ describe('OrderForm', () => {
     userEvent.type(nameField, 'Bailey')
     expect(nameField).toHaveValue('Bailey')
   })
+
+  it('should allow a user to add ingredients', () => {
+    const guacamole = screen.getByLabelText('guacamole')
+    const sourCream = screen.getByLabelText('sour cream')
+    const steak = screen.getByLabelText('steak')
+    
+    userEvent.click(guacamole)
+    userEvent.click(sourCream)
+    userEvent.click(steak)
+    
+    const orderSummary = screen.getByText('Order: guacamole, sour cream, steak')
+    expect(orderSummary).toBeInTheDocument()
+  })
+
+  it('should allow a user to remove added ingredients', () => {
+    const guacamole = screen.getByLabelText('guacamole')
+    userEvent.click(guacamole)
+    expect(screen.getByText('Order: guacamole')).toBeInTheDocument()
+    userEvent.click(guacamole)
+    expect(screen.getByText('Order: Nothing selected')).toBeInTheDocument()
+  })
 })

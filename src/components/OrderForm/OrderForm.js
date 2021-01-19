@@ -8,10 +8,12 @@ const OrderForm = ({ addOrder }) => {
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream']
     return possibleIngredients.map(ingredient => {
       return (
-        <label htmlFor='checkbox' key={ingredient}>
+        <label htmlFor={ingredient} key={ingredient}>
           <input
+            id={ingredient}
             key={ingredient}
             name={ingredient}
+            value={ingredient}
             type='checkbox'
             checked={ingredients.includes(ingredient) ? true : false}
             onChange={() => handleIngredients(ingredient)}
