@@ -14,3 +14,12 @@ export const postOrder = async (burrito) => {
   const data = await response.json()
   return data
 }
+
+export const deleteOrder = async (orderId) => {
+  const response = await fetch(`http://localhost:3001/api/v1/orders/${orderId}`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' }
+  })
+  const data = await response.json()
+  return data
+}
