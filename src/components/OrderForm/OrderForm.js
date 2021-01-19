@@ -57,7 +57,7 @@ const OrderForm = ({ addOrder }) => {
   }
 
   return (
-    <form>
+    <form data-testid='order-form'>
       <input
         type='text'
         placeholder='Name'
